@@ -4,6 +4,7 @@ from xgboost import XGBClassifier
 from category_encoders.target_encoder import TargetEncoder 
 from skopt import BayesSearchCV
 from skopt.space import Real, Integer
+from sklearn.metrics import accuracy_score ,confusion_matrix, f1_score, precision_score, recall_score, classification_report
 
 def train_model(df, target_column):
     # separating features and target variable
@@ -37,10 +38,19 @@ def train_model(df, target_column):
         "clf__scale_pos_weight": Real(0.8, 3.0)
     }
 
-    opt = BayesSearchCV(estimator=pipeline, search_spaces=search_space, n_iter=100, cv=3, scoring='f1', random_state=7)
+    opt = BayesSearchCV(estimator=pipeline, search_spaces=search_space, n_iter=50, cv=3, scoring='f1', random_state=7)
 
     #train the XGBoost model:
 
     opt.fit(X_train, y_train)
 
-    return opt.best_score_, opt.score(X_test, y_test), opt.predict(X_test), opt.predict_proba(X_test)
+    y_pred = opt.predict(X_test)
+    accuracy = accuracy_score(y_test, y_pred)
+    cm = confusion_matrix(y_test, y_pred)
+    f1 = f1_score(y_test, y_pred, average='weighted')
+    #f1_training = f1_score(y_train, RandomizedSearchCV_clf.predict(X_train), average='weighted')
+    precision = precision_score(y_test, y_pred, average='weighted')
+    recall = recall_score(y_test, y_pred, average='weighted')
+    report = classification_report(y_test, y_pred)
+
+    return opt.best_estimator_ ,opt.best_score_ , accuracy, cm, f1, precision, recall , report #best score is the best f1 score on the training set

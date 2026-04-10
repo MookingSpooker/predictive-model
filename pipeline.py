@@ -24,7 +24,7 @@ if __name__ == '__main__':
     print("Training the model...")
     output = training_tree(df, "Survived")
     print("Best estimator:", output[0], "\n")
-    print("accuracy on training set:", output[1], "\n")
+    print("f1 on cross validation:", output[1], "\n")
     print("Accuracy:", output[2], "\n")
     print("Confusion Matrix:\n", output[3], "\n")
     print("F1 Score:", output[4], "\n")

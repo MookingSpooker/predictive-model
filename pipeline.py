@@ -1,3 +1,4 @@
+from utils.data_management.training_model_tree import *
 from utils.data_management.data_analysis import *
 from utils.data_management.metric_calculator import *
 from utils.data_management.training_model import *
@@ -18,13 +19,17 @@ if __name__ == '__main__':
 
     remove_duplicates(df)
 
-    run_eda(df, "Survived")
+    #run_eda(df, "Survived")
 
-    print(df.head())
+    #print(df.head())
 
     print("Training the model...")
-    output = train_model(df, "Survived")
-    print("Best score (training set): " + str(output[0]))
-    print("Best Score (test set): " + str(output[1]))
-    print("Predictions: " + str(output[2]))
-    print("Prediction Probabilities: " + str(output[3]))
+    output = training_tree(df, "Survived")
+    print("Best estimator:", output[0], "\n")
+    print("accuracy on training set:", output[1], "\n")
+    print("Accuracy:", output[2], "\n")
+    print("Confusion Matrix:\n", output[3], "\n")
+    print("F1 Score:", output[4], "\n")
+    print("Precision:", output[5], "\n")
+    print("Recall:", output[6], "\n")
+    print("Classification Report:\n", output[7])

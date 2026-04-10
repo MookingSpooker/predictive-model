@@ -17,8 +17,6 @@ if __name__ == '__main__':
     # removing redundant columns
     remove_columns(df, ["PassengerId", "Name", "Ticket", "Cabin"])
 
-    remove_duplicates(df)
-
     #run_eda(df, "Survived")
 
     #print(df.head())

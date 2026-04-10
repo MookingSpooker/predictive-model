@@ -48,4 +48,4 @@ def training_tree(df, target_column):
     report = classification_report(y_test, y_pred)
 
 
-    return RandomizedSearchCV_clf.best_estimator_ ,RandomizedSearchCV_clf.best_score_ , accuracy, cm, f1, precision, recall , report
+    return RandomizedSearchCV_clf.best_estimator_ ,RandomizedSearchCV_clf.best_score_ , accuracy, cm, f1, precision, recall , report #best score is the best f1 score on the training set

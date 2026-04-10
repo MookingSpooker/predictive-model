@@ -37,7 +37,7 @@ def train_model(df, target_column):
         "clf__scale_pos_weight": Real(0.8, 3.0)
     }
 
-    opt = BayesSearchCV(estimator=pipeline, search_spaces=search_space, n_iter=50, cv=3, scoring='roc_auc', random_state=7)
+    opt = BayesSearchCV(estimator=pipeline, search_spaces=search_space, n_iter=100, cv=3, scoring='f1', random_state=7)
 
     #train the XGBoost model:
 
